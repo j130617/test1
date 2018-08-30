@@ -25,75 +25,75 @@ body { font: 12px Arial;}
 <!-- load the d3.js library -->    	
 <script src="//d3js.org/d3.v4.min.js"></script>
 
-	<script>
-var margin2 = {
-  top: 20,
-  right: 20,
-  bottom: 20,
-  left: 20
-};
-var height2 = 400 - margin2.top - margin2.bottom;
-var width2 = 500 - margin2.left - margin2.right;
-// Add svg to
-var svg = d3.select('body').
-append('svg').
-attr('width', width2 + margin2.left + margin2.right).
-attr('height', height2 + margin2.top + margin2.bottom).
-append('g').
-attr('transform', 'translate(' + margin2.left + ',' + margin2.top + ')');
+<script>
+var margin = {top: 20, right: 20, bottom: 20, left: 20};
+
+var height = 400 - margin.top - margin.bottom;
+var width = 500 - margin.left - margin.right;
+
+	// Add svg to
+var svg = d3.select('body').append('svg').
+attr('width', width + margin.left + margin.right).
+attr('height', height + margin.top + margin.bottom).
+	append('g').
+		attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 //title
 svg.append("text")
-  .attr("x", (width2 / 2))
-  .attr("y", 0 - (margin2.top / 3))
+  .attr("x", (width / 2))
+  .attr("y", 0 - (margin.top / 3))
   .attr("text-anchor", "middle")
   .style("font-size", "16px")
   .style("text-decoration", "underline")
   .text("Title");
-// X scale
-var x2 = d3.scaleBand().
-range([width2, 0])
+
+	// X scale
+var x = d3.scaleBand().
+range([width, 0])
   .padding(0.1);
 //y scale
-var y2 = d3.scaleLinear()
-  .range([height2, 0]);
-var xAxis = d3.axisBottom(x2);
-var yAxis = d3.axisLeft(y2).
-tickSize(6, 0);
+var y = d3.scaleLinear()
+  .range([height, 0]);
+
+var xAxis = d3.axisBottom(x);
+var yAxis = d3.axisLeft(y).tickSize(6, 0);
+
 // text label for the x axis
 svg.append("text")
-  .attr("transform", "translate(" + (width2 / 2) + " ," + (height2 + margin2.top + 20) + ")")
+  .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.top + 20) + ")")
   .style("text-anchor", "middle")
   .text("X Label");
+
 function render(data) {
-  x2.domain(data.map(function(d) {
+  x.domain(data.map(function(d) {
     return d["date"];
   }));
-  y2.domain(d3.extent(data, function(d) {
+  y.domain(d3.extent(data, function(d) {
     return d["MacdHistogram"];
   })).nice();
-  svg.selectAll('.bar').
+  
+svg.selectAll('.bar').
   data(data).
   enter().append('rect').
   attr('class', function(d) {
     return "bar bar--" + (d["MacdHistogram"] < 0 ? "negative" : "positive");
   }).
   attr('x', function(d) {
-    return x2(d["date"]);
+    return x(d["date"]);
   }).
   attr('y', function(d) {
-    return y2(Math.max(0, d["MacdHistogram"]));
+    return y(Math.max(0, d["MacdHistogram"]));
   }).
   attr('height', function(d) {
-    return Math.abs(y2(d["MacdHistogram"]) - y2(0));
+    return Math.abs(y(d["MacdHistogram"]) - y(0));
   }).
-  attr('width', x2.bandwidth());
+  attr('width', x.bandwidth());
   svg.append('g').
   attr('class', 'y axis').
-  attr('transform', 'translate(' + width2 + ',0)').
+  attr('transform', 'translate(' + width + ',0)').
   call(yAxis);
   var tickNegative = svg.append('g').
   attr('class', 'x axis').
-  attr('transform', 'translate(0,' + y2(0) + ')').
+  attr('transform', 'translate(0,' + y(0) + ')').
   call(xAxis).
   selectAll('.tick').
   filter(function(d, i) {
