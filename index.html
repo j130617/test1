@@ -76,23 +76,23 @@ function render(data) {
     return d["date"];
   }));
   y.domain(d3.extent(data, function(d) {
-    return d["perc"];
+    return d["waarde"];
   })).nice();
 
   svg.selectAll('.bar').
   data(data).
   enter().append('rect').
   attr('class', function(d) {
-    return "bar bar--" + (d["perc"] < 0 ? "negative" : "positive");
+    return "bar bar--" + (d["waarde"] < 0 ? "negative" : "positive");
   }).
   attr('x', function(d) {
     return x(d["date"]);
   }).
   attr('y', function(d) {
-    return y(Math.max(0, d["perc"]));
+    return y(Math.max(0, d["waarde"]));
   }).
   attr('height', function(d) {
-    return Math.abs(y(d["perc"]) - y(0));
+    return Math.abs(y(d["waarde"]) - y(0));
   }).
   attr('width', x.bandwidth());
 
@@ -113,106 +113,106 @@ function render(data) {
 	
 var data = [{
   	date: 2010 Q1,
-  	perc: -0.001
+  	waarde: -1
 }, {
   	date: 2010 Q2,
-  	perc: 0.019
+  	waarde: 19
 }, {
   	date: 2010 Q3,
-  	perc: 0.017
+  	waarde: 17
 }, {
 	date: 2010 Q4, 
-	perc: 0.019
+	waarde: 19
 }, {
 	date: 2011 Q1,
-	perc: 0.028
+	waarde: 28
 }, {
 	date: 2011 Q2,
-	perc: 0.021
+	waarde: 21
 }, {
 	date: 2011 Q3,
-	perc: 0.14
+	waarde: 14
 }, {
 	date: 2011 Q4,
-	perc: 0.00
+	waarde: 0
 }, {
 	date: 2012 Q1,
-	perc: -0.011
+	waarde: -11
 }, {
 	date: 2012 Q2,
-	perc: -0.006
+	waarde: -6
 }, {
 	date: 2012 Q3,
-	perc: -0.012
+	waarde: -12
 }, {
 	date: 2012 Q4,
-	perc: -0.012
+	waarde: -12
 }, {
 	date: 2013 Q1,
-	perc: -0.017
+	waarde: -17
 }, {
 	date: 2013 Q2,
-	perc: -0.005
+	waarde: -5
 }, {
 	date: 2013 Q3,
-	perc: 0.003
+	waarde: 3
 }, {
 	date: 2013 Q4,
-	perc: 0.014
+	waarde: 14
 }, {
 	date: 2014 Q1,
-	perc: 0.013
+	waarde: 13
 }, {
 	date: 2014 Q2,
-	perc: 0.014
+	waarde: 14
 }, {
 	date: 2014 Q3,
-	perc: 0.011
+	waarde: 11
 }, {
 	date: 2015 Q1,
-	perc: 0.019
+	waarde: 19
 }, {
 	date: 2014 Q4,
-	perc: 0.018
+	waarde: 18
 }, {
 	date: 2015 Q2,
-	perc: 0.021
+	waarde: 21
 }, {
 	date: 2015 Q3,
-	perc: 0.025
+	waarde: 25
 }, {
 	date: 2015 Q4,
-	perc: 0.014
+	waarde: 14
 }, {
 	date: 2016 Q1,
-	perc: 0.023
+	waarde: 23
 }, {
 	date: 2016 Q2,
-	perc: 0.024
+	waarde: 24
 }, {
 	date: 2016 Q3,
-	perc: 0.021
+	waarde: 21
 }, {
 	date: 2016 Q4,
-	perc: 0.02
+	waarde: 2
 }, {
 	date: 2017 Q1,
-	perc: 0.03
+	waarde: 3
 }, {
 	date: 2017 Q2,
-	perc: 0.029
+	waarde: 29
 }, {
 	date: 2017 Q3,
-	perc: 0.028
+	waarde: 28
 }, {
 	date: 2017 Q4,
-	perc: 0.027
+	waarde: 27
 }, 
 	date: 2018 Q1,
-	perc: 0.028
+	waarde: 28
 }, {
 	date: 2018 Q2,
-	perc: 0.029
+	waarde: 29
 }];
 
 render(data)
