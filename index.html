@@ -80,23 +80,23 @@ function render(data) {
     return d["date"];
   }));
   y2.domain(d3.extent(data, function(d) {
-    return d["MacdHistogram"];
+    return d["waarde"];
   })).nice();
 
   svg.selectAll('.bar').
   data(data).
   enter().append('rect').
   attr('class', function(d) {
-    return "bar bar--" + (d["MacdHistogram"] < 0 ? "negative" : "positive");
+    return "bar bar--" + (d["waarde"] < 0 ? "negative" : "positive");
   }).
   attr('x', function(d) {
     return x2(d["date"]);
   }).
   attr('y', function(d) {
-    return y2(Math.max(0, d["MacdHistogram"]));
+    return y2(Math.max(0, d["waarde"]));
   }).
   attr('height', function(d) {
-    return Math.abs(y2(d["MacdHistogram"]) - y2(0));
+    return Math.abs(y2(d["waarde"]) - y2(0));
   }).
   attr('width', x2.bandwidth());
 
@@ -117,49 +117,49 @@ function render(data) {
 
 var data = [{
   date: 1,
-  MacdHistogram: 1
+  waarde: 1
 }, {
   date: 2,
-  MacdHistogram: -2
+  waarde: -2
 }, {
   date: 3,
-  MacdHistogram: 8
+  waarde: 8
 }, {
   date: 4,
-  MacdHistogram: 3
+  waarde: 3
 }, {
   date: 5,
-  MacdHistogram: 12
+  waarde: 12
 }, {
   date: 6,
-  MacdHistogram: -5
+  waarde: -5
 }, {
   date: 7,
-  MacdHistogram: 1
+  waarde: 1
 }, {
   date: 8,
-  MacdHistogram: 9
+  waarde: 9
 }, {
   date: 9,
-  MacdHistogram: -1
+  waarde: -1
 }, {
   date: 10,
-  MacdHistogram: 10
+  waarde: 10
 }, {
   date: 11,
-  MacdHistogram: 7
+  waarde: 7
 }, {
   date: 12,
-  MacdHistogram: -8
+  waarde: -8
 }, {
   date: 13,
-  MacdHistogram: 7
+  waarde: 7
 }, {
   date: 14,
-  MacdHistogram: -4
+  waarde: -4
 }, {
   date: 15,
-  MacdHistogram: 1
+  waarde: 1
 }];
 
 render(data)
