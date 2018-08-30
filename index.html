@@ -68,23 +68,23 @@ function render(data) {
     return d["date"];
   }));
   y.domain(d3.extent(data, function(d) {
-    return d["MacdHistogram"];
+    return d["perc"];
   })).nice();
   
 svg.selectAll('.bar').
   data(data).
   enter().append('rect').
   attr('class', function(d) {
-    return "bar bar--" + (d["MacdHistogram"] < 0 ? "negative" : "positive");
+    return "bar bar--" + (d["perc"] < 0 ? "negative" : "positive");
   }).
   attr('x', function(d) {
     return x(d["date"]);
   }).
   attr('y', function(d) {
-    return y(Math.max(0, d["MacdHistogram"]));
+    return y(Math.max(0, d["perc"]));
   }).
   attr('height', function(d) {
-    return Math.abs(y(d["MacdHistogram"]) - y(0));
+    return Math.abs(y(d["perc"]) - y(0));
   }).
   attr('width', x.bandwidth());
   svg.append('g').
@@ -100,52 +100,43 @@ svg.selectAll('.bar').
     return data[i].value < 0;
   });
 }
-var data = [{
-  date: 1,
-  MacdHistogram: 1
-}, {
-  date: 2,
-  MacdHistogram: -2
-}, {
-  date: 3,
-  MacdHistogram: 8
-}, {
-  date: 4,
-  MacdHistogram: 3
-}, {
-  date: 5,
-  MacdHistogram: 12
-}, {
-  date: 6,
-  MacdHistogram: -5
-}, {
-  date: 7,
-  MacdHistogram: 1
-}, {
-  date: 8,
-  MacdHistogram: 9
-}, {
-  date: 9,
-  MacdHistogram: -1
-}, {
-  date: 10,
-  MacdHistogram: 10
-}, {
-  date: 11,
-  MacdHistogram: 7
-}, {
-  date: 12,
-  MacdHistogram: -8
-}, {
-  date: 13,
-  MacdHistogram: 7
-}, {
-  date: 14,
-  MacdHistogram: -4
-}, {
-  date: 15,
-  MacdHistogram: 1
-}];
+var data = [
+
+{date:2010 1e kwartaal, perc:-0.001},
+{date:2010 2e kwartaal, perc:0.019},
+{date:2010 3e kwartaal, perc:0.017},
+{date:2010 4e kwartaal, perc:0.019},
+{date:2011 1e kwartaal, perc:0.028},
+{date:2011 2e kwartaal, perc:0.021},
+{date:2011 3e kwartaal, perc:0.14},
+{date:2011 4e kwartaal, perc:0.00},
+{date:2012 1e kwartaal, perc:-0.011},
+{date:2012 2e kwartaal, perc:-0.006},
+{date:2012 3e kwartaal, perc:-0.012},
+{date:2012 4e kwartaal, perc:-0.012},
+{date:2013 1e kwartaal, perc:-0.017},
+{date:2013 2e kwartaal, perc:-0.005},
+{date:2013 3e kwartaal, perc:0.003},
+{date:2013 4e kwartaal, perc:0.014},
+{date:2014 1e kwartaal, perc:0.013},
+{date:2014 2e kwartaal, perc:0.014},
+{date:2014 3e kwartaal, perc:0.011},
+{date:2015 1e kwartaal, perc:0.019},
+{date:2014 4e kwartaal, perc:0.018},
+{date:2015 2e kwartaal, perc:0.021},
+{date:2015 3e kwartaal, perc:0.025},
+{date:2015 4e kwartaal, perc:0.014},
+{date:2016 1e kwartaal*, perc:0.023},
+{date:2016 2e kwartaal*, perc:0.024},
+{date:2016 3e kwartaal*, perc:0.021},
+{date:2016 4e kwartaal*, perc:0.02},
+{date:2017 1e kwartaal*, perc:0.03},
+{date:2017 2e kwartaal*, perc:0.029},
+{date:2017 3e kwartaal*, perc:0.028},
+{date:2017 4e kwartaal*, perc:0.027},
+{date:2018 1e kwartaal*, perc:0.028},
+{date:2018 2e kwartaal*, perc:0.029}];
+
 render(data)
 </script>
 </body>
